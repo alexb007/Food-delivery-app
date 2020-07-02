@@ -6,7 +6,7 @@ from apps.foods.models import FoodCategory, Food
 @admin.register(FoodCategory)
 class FoodCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'restaurant')
-    list_filter = ('restaurant')
+    list_filter = ('restaurant', )
     
 @admin.register(Food)
 class FoodAdmin(admin.ModelAdmin):
