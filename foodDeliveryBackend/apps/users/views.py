@@ -9,7 +9,7 @@ from .serializers import CreateUserSerializer, UserSerializer
 
 CLIENT_ID = 'g6eBjRBlqL8jYNqe5G2KQDdoE9v4rnpEFQIcyeMr'
 CLIENT_SECRET = 'BDbmthtkPSJsqgiQ92S8hEyPMXyjIb5MKj8pjaqt4ZWuU45yoCgZ0pXFA0IXQMJKvTO6tbIf4QXQ3xLH1vsyPGcSGHWh1y0LvZPZ8uYM7sOhgbx1NJMECJenBHGMWJab'
-BASE_URL = 'http://127.0.0.1:8000/o/'
+BASE_URL = 'http://15.188.194.70/o/'
 
 
 @api_view(['GET'])
