@@ -1,18 +1,22 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 import requests
 
 from .models import User
-from .serializers import CreateUserSerializer
-
+from .serializers import CreateUserSerializer, UserSerializer
 
 CLIENT_ID = 'vKAq3xHRIDpKEhiVEeEfEQpzrK6GjUV9r2rMaxJf'
 CLIENT_SECRET = 'COXQG85XmI9w48OwHHt6CfMUDZ1cHcsKAiDeLn2n4QwCF9o7aRI7FMNGDd9jjiEhSSSy9hULuyK2ge92vuSXGXmeZhSjvXrldj48TWcXVjj6a5eFS0SRqjAjSefce7Uh'
 BASE_URL = 'http://127.0.0.1:8000/o/'
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def me(request):
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)
 
 
 @api_view(['POST'])
