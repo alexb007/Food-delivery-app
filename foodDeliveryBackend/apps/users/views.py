@@ -13,6 +13,8 @@ CLIENT_SECRET = 'COXQG85XmI9w48OwHHt6CfMUDZ1cHcsKAiDeLn2n4QwCF9o7aRI7FMNGDd9jjiE
 BASE_URL = 'http://127.0.0.1:8000/o/'
 
 
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register_customer(request):
