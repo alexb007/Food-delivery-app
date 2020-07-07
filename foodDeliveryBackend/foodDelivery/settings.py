@@ -25,7 +25,7 @@ SECRET_KEY = 'gsl(lk57$1wq#j$dx3#nwa*+9=ej56&353kkx-16dp2r0ya*@n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
