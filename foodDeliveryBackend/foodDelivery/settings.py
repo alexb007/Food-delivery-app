@@ -81,12 +81,16 @@ WSGI_APPLICATION = 'foodDelivery.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fooddelivery',
-        'USER': 'deliver',
-        'PASSWORD': 'Qazwsxedc007',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'fooddelivery',
+    #     'USER': 'deliver',
+    #     'PASSWORD': 'Qazwsxedc007',
+    #     'HOST': 'localhost'
+    # }
 }
 
 # Password validation
@@ -124,10 +128,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CORS_ORIGIN_ALLOW_ALL = True
 

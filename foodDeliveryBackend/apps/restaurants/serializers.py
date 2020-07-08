@@ -1,12 +1,18 @@
 from rest_framework import serializers
-from .models import Restaurant
+from .models import Restaurant, RestaurantType
 from apps.foods.serializers import FoodCategorySerializer
 from apps.foods.models import FoodCategory
 
 
-class RestaurantSerializer(serializers.ModelSerializer):
+class RestaurantTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RestaurantType
+        fields = ('name',)
 
+
+class RestaurantSerializer(serializers.ModelSerializer):
     categories = FoodCategorySerializer(many=True, read_only=True)
+    type = RestaurantTypeSerializer()
 
     def __init__(self, *args, **kwargs):
         # initialize fields
@@ -25,4 +31,4 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Restaurant
-        fields = ('id', 'name', 'address', 'categories')
+        fields = ('id', 'name', 'address', 'categories', 'opens', 'closes', 'type',)
