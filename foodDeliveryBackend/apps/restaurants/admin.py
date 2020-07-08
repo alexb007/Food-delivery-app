@@ -7,7 +7,6 @@ from apps.restaurants.models import Restaurant, RestaurantType
 @admin.register(RestaurantType)
 class RestaurantTypeAdmin(admin.ModelAdmin):
     list_display = ('name',)
-    list_filter = ('user',)
 
 
 @admin.register(Restaurant)
