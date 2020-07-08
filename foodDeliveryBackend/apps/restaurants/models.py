@@ -6,6 +6,7 @@ from apps.users.models import User
 
 class RestaurantType(models.Model):
     name = models.CharField(max_length=80)
+    icon = models.ImageField(upload_to='restaurants/', default='restaurants/noimage.png')
 
     def __str__(self):
         return self.name
@@ -20,6 +21,7 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=128)
     address = models.TextField()
     logo = models.ImageField(upload_to='restaurants/', default='restaurants/noimage.png')
+    background = models.ImageField(upload_to='restaurants/', default='restaurants/noimage.png')
     type = models.ForeignKey(
         RestaurantType,
         on_delete=models.CASCADE,

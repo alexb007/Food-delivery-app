@@ -7,7 +7,7 @@ from apps.foods.models import FoodCategory
 class RestaurantTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = RestaurantType
-        fields = ('id', 'name',)
+        fields = ('id', 'name', 'icon')
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
@@ -31,4 +31,4 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Restaurant
-        fields = ('id', 'name', 'address', 'categories', 'opens', 'closes', 'type',)
+        fields = ('id', 'name', 'address', 'categories', 'opens', 'closes', 'type', 'logo', 'background')
