@@ -1,11 +1,11 @@
 from rest_framework_nested import routers
 from apps.foods.viewsets import FoodViewSet, FoodCategoryViewSet
-from apps.restaurants.viewsets import RestaurantViewSet
+from apps.restaurants.viewsets import RestaurantViewSet, RestaurantTypeViewSet
 
 router = routers.DefaultRouter()
 
 router.register('restaurants', RestaurantViewSet, base_name='restaurants')
-router.register('restaurant_types', RestaurantViewSet, base_name='restaurants')
+router.register('restaurant_types', RestaurantTypeViewSet, base_name='restaurant types')
 
 restaurant_router = routers.NestedDefaultRouter(
     router, 'restaurants', lookup='restaurant')
