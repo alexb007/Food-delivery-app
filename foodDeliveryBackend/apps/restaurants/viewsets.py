@@ -13,7 +13,7 @@ class RestaurantTypeViewSet(viewsets.ModelViewSet):
     def list(self, request):
 
         if request.query_params == {}:
-            queryset = Restaurant.objects.all()
+            queryset = RestaurantType.objects.all()
         else:
             query = request.query_params['search']
             queryset = RestaurantType.objects.filter(name__icontains=query)

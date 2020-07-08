@@ -7,7 +7,7 @@ from apps.foods.models import FoodCategory
 class RestaurantTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = RestaurantType
-        fields = ('name',)
+        fields = ('id', 'name',)
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
