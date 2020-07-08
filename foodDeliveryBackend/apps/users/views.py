@@ -50,8 +50,8 @@ def token(request):
             'grant_type': 'password',
             'username': request.data['username'],
             'password': request.data['password'],
-            'client_id': CLIENT_ID,
-            'client_secret': CLIENT_SECRET,
+            # 'client_id': CLIENT_ID,
+            # 'client_secret': CLIENT_SECRET,
         },
     )
 
