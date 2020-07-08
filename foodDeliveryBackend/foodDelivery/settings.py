@@ -80,17 +80,17 @@ WSGI_APPLICATION = 'foodDelivery.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
-    }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'fooddelivery',
-    #     'USER': 'deliver',
-    #     'PASSWORD': 'Qazwsxedc007',
-    #     'HOST': 'localhost'
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': 'db.sqlite3',
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'fooddelivery',
+        'USER': 'deliver',
+        'PASSWORD': 'Qazwsxedc007',
+        'HOST': 'localhost'
+    }
 }
 
 # Password validation
