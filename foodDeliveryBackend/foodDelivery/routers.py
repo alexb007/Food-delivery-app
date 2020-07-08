@@ -5,6 +5,7 @@ from apps.restaurants.viewsets import RestaurantViewSet
 router = routers.DefaultRouter()
 
 router.register('restaurants', RestaurantViewSet, base_name='restaurants')
+router.register('restaurant_types', RestaurantViewSet, base_name='restaurants')
 
 restaurant_router = routers.NestedDefaultRouter(
     router, 'restaurants', lookup='restaurant')
