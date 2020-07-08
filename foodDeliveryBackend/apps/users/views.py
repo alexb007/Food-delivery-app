@@ -34,9 +34,9 @@ def register_restaurant(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def token(request):
-    '''
+    """
     Gets tokens with username and password
-    '''
+    """
     user = User.objects.filter(
         username__exact=request.data['username']).first()
 
@@ -45,6 +45,7 @@ def token(request):
 
     r = requests.post(
         BASE_URL + 'token/',
+        auth=(CLIENT_ID, CLIENT_SECRET),
         data={
             'grant_type': 'password',
             'username': request.data['username'],
@@ -67,9 +68,9 @@ def token(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def refresh_token(request):
-    '''
+    """
     Registers user to the server.
-    '''
+    """
     r = requests.post(
         BASE_URL + 'token/',
         data={
@@ -85,9 +86,9 @@ def refresh_token(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def revoke_token(request):
-    '''
+    """
     Method to revoke tokens.
-    '''
+    """
     r = requests.post(
         BASE_URL + 'revoke_token/',
         data={
