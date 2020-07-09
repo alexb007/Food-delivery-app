@@ -1,4 +1,5 @@
 from rest_framework import viewsets, mixins
+from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
@@ -37,6 +38,13 @@ class FoodCategoryViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAuthenticated]
 
         return [permission() for permission in permission_classes]
+
+    @action(detail=True, methods=['get'])
+    def foods(self, request, *args, **kwargs):
+        category = self.get_object()
+        foods = category.foods.all()
+        serializer = FoodSerializer(foods, many=True)
+        return Response(serializer.data)
 
 
 class FoodViewSet(viewsets.ModelViewSet):
