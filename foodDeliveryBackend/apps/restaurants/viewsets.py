@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from .models import Restaurant, RestaurantType
-from .serializers import RestaurantSerializer, RestaurantTypeSerializer
+from .serializers import RestaurantSerializer, RestaurantTypeSerializer, RestaurantRetrieveSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -37,6 +37,11 @@ class RestaurantViewSet(viewsets.ModelViewSet):
     queryset = Restaurant.objects.all().prefetch_related(
         'categories', 'categories__foods')
     serializer_class = RestaurantSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return RestaurantRetrieveSerializer
+        return self.serializer_class
 
     def list(self, request):
 

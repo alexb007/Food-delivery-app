@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Restaurant, RestaurantType
-from apps.foods.serializers import FoodCategorySerializer
+from apps.foods.serializers import FoodCategorySerializer, FoodSerializer
 from apps.foods.models import FoodCategory
 
 
@@ -32,3 +32,13 @@ class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
         fields = ('id', 'name', 'address', 'categories', 'opens', 'closes', 'type', 'logo', 'background')
+
+
+class RestaurantRetrieveSerializer(serializers.ModelSerializer):
+    categories = FoodCategorySerializer(many=True, read_only=True)
+    foods = FoodSerializer(many=True, read_only=True)
+    type = RestaurantTypeSerializer()
+
+    class Meta:
+        model = Restaurant
+        fields = ('id', 'name', 'address', 'categories', 'opens', 'closes', 'type', 'logo', 'background', 'foods')
