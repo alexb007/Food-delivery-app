@@ -95,6 +95,8 @@ class OrderProduct(models.Model):
     )
     comment = models.CharField(
         max_length=300,
+        blank=True,
+        null=True,
     )
 
     def __str__(self):

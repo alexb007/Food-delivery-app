@@ -29,7 +29,6 @@ class Food(models.Model):
     active = models.BooleanField()
     price = models.PositiveIntegerField()
     is_veg = models.BooleanField()
-    quantity = JSONField(default=dict, blank=True)
 
     def __str__(self):
         return self.name

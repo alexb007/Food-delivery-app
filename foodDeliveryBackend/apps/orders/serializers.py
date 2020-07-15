@@ -5,7 +5,6 @@ from apps.orders.models import Order, OrderProduct
 
 
 class OrderProductSerializer(serializers.ModelSerializer):
-    product = FoodProductSerializer()
 
     class Meta:
         model = OrderProduct
@@ -24,6 +23,5 @@ class OrderSerializer(serializers.ModelSerializer):
         order = Order.objects.create(**validated_data)
         for product_data in products_data:
             print(product_data)
-            product_data['product'] = product_data['product']['id']
             OrderProduct.objects.create(order=order, **product_data)
         return order
