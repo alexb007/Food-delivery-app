@@ -71,7 +71,7 @@ class RestaurantViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def get_permissions(self):
-        if self.action == 'list' or self.action == 'retrieve':
+        if self.action in ['list', 'retrieve', 'foods']:
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAuthenticated]
