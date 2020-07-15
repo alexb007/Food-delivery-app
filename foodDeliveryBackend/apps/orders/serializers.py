@@ -1,12 +1,11 @@
 from rest_framework import serializers
 
-from apps.foods.serializers import FoodSerializer
+from apps.foods.serializers import FoodProductSerializer
 from apps.orders.models import Order, OrderProduct
 
 
 class OrderProductSerializer(serializers.ModelSerializer):
-
-    product = FoodSerializer(read_only=True)
+    product = FoodProductSerializer()
 
     class Meta:
         model = OrderProduct

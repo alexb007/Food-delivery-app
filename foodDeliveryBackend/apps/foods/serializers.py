@@ -14,6 +14,17 @@ class FoodSerializer(serializers.ModelSerializer):
                   'active', 'is_veg', 'quantity')
 
 
+class FoodProductSerializer(serializers.ModelSerializer):
+
+    def create(self, validated_data):
+        return Food.objects.create(**validated_data)
+
+    class Meta:
+        model = Food
+        fields = ('id', 'name', 'description', 'price',
+                  'active', 'is_veg', 'quantity')
+
+
 class FoodCategorySerializer(serializers.ModelSerializer):
     foods = FoodSerializer(many=True, read_only=True)
 
