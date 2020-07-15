@@ -25,6 +25,7 @@ class Food(models.Model):
     restaurant = models.ForeignKey(
         Restaurant, related_name="foods", on_delete=models.CASCADE)
     description = models.TextField()
+    cover = models.ImageField(upload_to='foods/', null=True, blank=True)
     active = models.BooleanField()
     price = models.PositiveIntegerField()
     is_veg = models.BooleanField()
