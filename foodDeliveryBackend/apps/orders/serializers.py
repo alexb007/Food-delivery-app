@@ -1,9 +1,13 @@
 from rest_framework import serializers
 
+from apps.foods.serializers import FoodSerializer
 from apps.orders.models import Order, OrderProduct
 
 
 class OrderProductSerializer(serializers.ModelSerializer):
+
+    product = FoodSerializer()
+
     class Meta:
         model = OrderProduct
         fields = '__all__'
