@@ -5,6 +5,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
+from ..foods.serializers import FoodSerializer
+
 
 class RestaurantTypeViewSet(viewsets.ModelViewSet):
     queryset = RestaurantType.objects.all()
@@ -75,3 +77,9 @@ class RestaurantViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAuthenticated]
 
         return [permission() for permission in permission_classes]
+
+    @action(methods=['get'], detail=True)
+    def foods(self, request, *args, **kwargs):
+        foods = self.get_object().foods.all()
+        serializer = FoodSerializer(foods, many=True)
+        return Response(serializer.data)
