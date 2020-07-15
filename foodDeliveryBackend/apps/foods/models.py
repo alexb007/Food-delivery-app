@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.utils.translation import gettext_lazy as _
 
 from apps.restaurants.models import Restaurant
 
@@ -8,6 +9,13 @@ class FoodCategory(models.Model):
     name = models.CharField(max_length=50)
     restaurant = models.ForeignKey(
         Restaurant, related_name="categories", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Food Category')
+        verbose_name_plural = _('Food Categories')
 
 
 class Food(models.Model):
@@ -18,6 +26,13 @@ class Food(models.Model):
         Restaurant, related_name="foods", on_delete=models.CASCADE)
     description = models.TextField()
     active = models.BooleanField()
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.PositiveIntegerField()
     is_veg = models.BooleanField()
     quantity = JSONField(default=dict)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Food Category')
+        verbose_name_plural = _('Food Categories')
