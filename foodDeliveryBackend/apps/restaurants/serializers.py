@@ -5,9 +5,15 @@ from apps.foods.models import FoodCategory
 
 
 class RestaurantTypeSerializer(serializers.ModelSerializer):
+    icon = serializers.SerializerMethodField()
     class Meta:
         model = RestaurantType
         fields = ('id', 'name', 'icon')
+
+    def get_icon(self, obj):
+        request = self.context.get('request')
+        icon_url = obj.icon.url
+        return request.build_absolute_uri(icon_url)
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
