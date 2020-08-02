@@ -1,3 +1,5 @@
+import django_filters
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 
@@ -35,6 +37,7 @@ class BusinessesViewSet(viewsets.ModelViewSet):
 class RestaurantTypeViewSet(viewsets.ModelViewSet):
     queryset = RestaurantCategory.objects.all()
     serializer_class = RestaurantTypeSerializer
+    filter_backends = (DjangoFilterBackend,)
 
     def list(self, request):
         if request.query_params == {}:
