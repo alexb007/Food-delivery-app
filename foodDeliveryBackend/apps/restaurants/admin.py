@@ -1,10 +1,14 @@
 from django.contrib import admin
-from apps.restaurants.models import Restaurant, RestaurantType
+from apps.restaurants.models import Restaurant, RestaurantCategory, BusinessType
 
 
 # Register your models here.
+@admin.register(BusinessType)
+class BusinessTypeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order')
 
-@admin.register(RestaurantType)
+
+@admin.register(RestaurantCategory)
 class RestaurantTypeAdmin(admin.ModelAdmin):
     list_display = ('name',)
 

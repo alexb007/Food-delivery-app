@@ -1,8 +1,9 @@
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 
-from .models import Restaurant, RestaurantType
-from .serializers import RestaurantSerializer, RestaurantTypeSerializer, RestaurantRetrieveSerializer
+from .models import Restaurant, RestaurantCategory, BusinessType
+from .serializers import RestaurantSerializer, RestaurantTypeSerializer, RestaurantRetrieveSerializer, \
+    BusinessTypeSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -10,17 +11,37 @@ from rest_framework.decorators import action
 from ..foods.serializers import FoodSerializer
 
 
+class BusinessesViewSet(viewsets.ModelViewSet):
+    queryset = BusinessType.objects.all().order_by('order')
+    serializer_class = BusinessTypeSerializer
+
+    def list(self, request, **kwargs):
+        if request.query_params == {}:
+            queryset = BusinessType.objects.all()
+        else:
+            query = request.query_params['search']
+            queryset = BusinessType.objects.filter(name__icontains=query)
+        serializer = BusinessTypeSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def get_permissions(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]
+
+
 class RestaurantTypeViewSet(viewsets.ModelViewSet):
-    queryset = RestaurantType.objects.all()
+    queryset = RestaurantCategory.objects.all()
     serializer_class = RestaurantTypeSerializer
 
     def list(self, request):
-
         if request.query_params == {}:
-            queryset = RestaurantType.objects.all()
+            queryset = RestaurantCategory.objects.all()
         else:
             query = request.query_params['search']
-            queryset = RestaurantType.objects.filter(name__icontains=query)
+            queryset = RestaurantCategory.objects.filter(name__icontains=query)
 
         serializer = RestaurantTypeSerializer(
             queryset, many=True)
@@ -31,7 +52,6 @@ class RestaurantTypeViewSet(viewsets.ModelViewSet):
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAuthenticated]
-
         return [permission() for permission in permission_classes]
 
 

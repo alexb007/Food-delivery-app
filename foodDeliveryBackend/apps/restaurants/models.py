@@ -4,8 +4,29 @@ from django.utils.translation import gettext_lazy as _
 from apps.users.models import User
 
 
-class RestaurantType(models.Model):
+class BusinessType(models.Model):
+    name = models.CharField(max_length=100, verbose_name=_('Business Name'))
+    order = models.PositiveSmallIntegerField(
+        default=0,
+        verbose_name=_('Order in main page')
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Business Type')
+        verbose_name_plural = _('Business Type')
+        ordering = _()
+
+
+class RestaurantCategory(models.Model):
     name = models.CharField(max_length=80)
+    business = models.ForeignKey(
+        BusinessType,
+        on_delete=models.CASCADE,
+        verbose_name=_('Business')
+    )
     icon = models.ImageField(upload_to='restaurants/', default='restaurants/noimage.png')
 
     def __str__(self):
@@ -23,7 +44,7 @@ class Restaurant(models.Model):
     logo = models.ImageField(upload_to='restaurants/', default='restaurants/noimage.png')
     background = models.ImageField(upload_to='restaurants/', default='restaurants/noimage.png')
     type = models.ForeignKey(
-        RestaurantType,
+        RestaurantCategory,
         on_delete=models.CASCADE,
         null=True,
         related_name='restaurants',
