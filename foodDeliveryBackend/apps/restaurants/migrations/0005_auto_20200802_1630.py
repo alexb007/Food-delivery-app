@@ -4,8 +4,16 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 
-class Migration(migrations.Migration):
+def rename_model(apps, schema_editor):
+    categories = []
+    RestaurantType = apps.get_model('restaurants', 'RestaurantType')
+    Category = apps.get_model('restaurants', 'RestaurantCategory')
+    for restaurantType in RestaurantType.objects.all():
+        categories.append(Category(name=restaurantType.name, icon=restaurantType.icon))
+    Category.bulk_create(categories)
 
+
+class Migration(migrations.Migration):
     dependencies = [
         ('restaurants', '0004_auto_20200708_0221'),
     ]
@@ -30,7 +38,9 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=80)),
                 ('icon', models.ImageField(default='restaurants/noimage.png', upload_to='restaurants/')),
-                ('business', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='restaurants.BusinessType', verbose_name='Business')),
+                ('business',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='restaurants.BusinessType',
+                                   verbose_name='Business')),
             ],
             options={
                 'verbose_name': 'Restaurant Type',
@@ -38,11 +48,14 @@ class Migration(migrations.Migration):
                 'ordering': ('name', '-id'),
             },
         ),
+        migrations.RunPython(rename_model),
         migrations.AlterField(
             model_name='restaurant',
             name='type',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='restaurants', to='restaurants.RestaurantCategory', verbose_name='Restaurant Type'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='restaurants',
+                                    to='restaurants.RestaurantCategory', verbose_name='Restaurant Type'),
         ),
+
         migrations.DeleteModel(
             name='RestaurantType',
         ),
