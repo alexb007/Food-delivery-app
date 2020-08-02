@@ -17,7 +17,7 @@ class BusinessType(models.Model):
     class Meta:
         verbose_name = _('Business Type')
         verbose_name_plural = _('Business Type')
-        ordering = _()
+        ordering = ('order', 'name')
 
 
 class RestaurantCategory(models.Model):
