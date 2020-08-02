@@ -10,7 +10,7 @@ def rename_model(apps, schema_editor):
     Category = apps.get_model('restaurants', 'RestaurantCategory')
     for restaurantType in RestaurantType.objects.all():
         categories.append(Category(name=restaurantType.name, icon=restaurantType.icon))
-    Category.bulk_create(categories)
+    Category.objects.bulk_create(categories)
 
 
 class Migration(migrations.Migration):
