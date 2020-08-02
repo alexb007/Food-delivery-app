@@ -8,8 +8,11 @@ def rename_model(apps, schema_editor):
     categories = []
     RestaurantType = apps.get_model('restaurants', 'RestaurantType')
     Category = apps.get_model('restaurants', 'RestaurantCategory')
+    BusinessType = apps.get_model('restaurants', 'BusinessType')
+    restaurant = BusinessType.objects.create(name='Рестораны', order=1)
+    shop = BusinessType.objects.create(name='Магазины', order=2)
     for restaurantType in RestaurantType.objects.all():
-        categories.append(Category(name=restaurantType.name, icon=restaurantType.icon))
+        categories.append(Category(name=restaurantType.name, icon=restaurantType.icon, business=restaurant))
     Category.objects.bulk_create(categories)
 
 
